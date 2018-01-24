@@ -1,29 +1,16 @@
 #!/bin/bash
-# Findsploit 20131223 by 1N3
-# 
-#      `7MN.   `7MF'        
-# __,    MMN.    M          
-#`7MM    M YMb   M  pd""b.  
-#  MM    M  `MN. M (O)  `8b 
-#  MM    M   `MM.M      ,89 
-#  MM    M     YMM    ""Yb. 
-#.JMML..JML.    YM       88 
-#                  (O)  .M' 
-#                   bmmmd'  
-#                           
-#
-#
-# ABOUT
+# Findsploit 20131223 by 1N3, 20180124 rewritten by termilus.
 
-# Finsploit is a simple bash script to quickly and easily search both local and online exploit databases. Currently searches Metasploit, Exploit-db, Google, CVE's, SecurityFocus, 1337day and OSVDB.
+# Findsploit is a simple bash script to quickly and easily search both local and online exploit databases. Currently searches Metasploit, Exploit-DB, SecurityFocus, 0day.today, NVD, CVEs, and Google.
 
 # REQUIREMENTS
-# This script relies on exploitdb's searchsploit script and files in /pentest/exploits/exploitdb
+# This script relies on exploitdb's searchsploit script
 
 # INSTALLATION
-# 1. Copy the script to /usr/bin
-# 2. Run chmod +rx /usr/bin/findsploit
-# 3. To run, type findsploit <name of product> <version> <local or remote>
+# 1. git clone https://github.com/cjdupreez/findsploit.git /opt/
+# 2. ln -s /opt/findsploit/findsploit /usr/bin/findsploit
+# 3. chmod +rx /usr/bin/findsploit
+# 4. To run, type findsploit <name of product> <version> <local or remote>
 
 
 clear
@@ -32,13 +19,14 @@ VAR1=$1;
 VAR2=$2;
 VAR3=$3;
 
-if [ -z "$1" ]; 
+if [ -z "$1" ];
 then
         echo "[+] findsploit by nonXero rewritten by termilus"
-        echo "[+] Usage: findsploit freeFTPd 1.0 remote"
+	echo "[+] Usage: findsploit <name of product> <version> <local or remote>"
+        echo "[+] Example: findsploit freeFTPd 1.0 remote"
         exit;
 else
-        echo "[+] findsploit by nonXero"
+        echo "[+] findsploit by nonXero rewritten by termilus"
         echo ""
         echo "[+] Metasploit exploits"
         echo ""
@@ -46,7 +34,7 @@ else
         echo ""
         echo "[+] ExploitDB exploits"
         echo ""
-        /usr/bin/searchsploit $VAR1 $VAR2 $VAR3 
+        /usr/bin/searchsploit $VAR1 $VAR2 $VAR3
         echo ""
         echo "[+] Press any key to search online or Ctrl+C to exit..."
         read test
