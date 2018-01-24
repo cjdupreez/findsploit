@@ -1,0 +1,70 @@
+#!/bin/bash
+# Findsploit 20131223 by 1N3
+# 
+#      `7MN.   `7MF'        
+# __,    MMN.    M          
+#`7MM    M YMb   M  pd""b.  
+#  MM    M  `MN. M (O)  `8b 
+#  MM    M   `MM.M      ,89 
+#  MM    M     YMM    ""Yb. 
+#.JMML..JML.    YM       88 
+#                  (O)  .M' 
+#                   bmmmd'  
+#                           
+#
+#
+# ABOUT
+
+# Finsploit is a simple bash script to quickly and easily search both local and online exploit databases. Currently searches Metasploit, Exploit-db, Google, CVE's, SecurityFocus, 1337day and OSVDB.
+
+# REQUIREMENTS
+# This script relies on exploitdb's searchsploit script and files in /pentest/exploits/exploitdb
+
+# INSTALLATION
+# 1. Copy the script to /usr/bin
+# 2. Run chmod +rx /usr/bin/findsploit
+# 3. To run, type findsploit <name of product> <version> <local or remote>
+
+
+clear
+
+VAR1=$1;
+VAR2=$2;
+VAR3=$3;
+
+if [ -z "$1" ]; 
+then
+        echo "[+] findsploit by nonXero rewritten by termilus"
+        echo "[+] Usage: findsploit freeFTPd 1.0 remote"
+        exit;
+else
+        echo "[+] findsploit by nonXero"
+        echo ""
+        echo "[+] Metasploit exploits"
+        echo ""
+        egrep -i "$VAR1" /usr/share/metasploit-framework/modules/exploits/* -R | grep "Name"
+        echo ""
+        echo "[+] ExploitDB exploits"
+        echo ""
+        /usr/bin/searchsploit $VAR1 $VAR2 $VAR3 
+        echo ""
+        echo "[+] Press any key to search online or Ctrl+C to exit..."
+        read test
+
+        echo "[+] Search Security Focus for exploits"
+	firefox 'https://www.google.com/search?q='$VAR1'+'$VAR2'+'$VAR3'+exploit+site:www.securityfocus.com' 2> /dev/null
+
+        echo "[+] Search 0day.today for exploits"
+	firefox 'https://www.google.com/search?q='$VAR1'+'$VAR2'+'$VAR3'+site:0day.today' 2> /dev/null
+
+        echo "[+] Search NVD for exploits"
+	firefox 'https://nvd.nist.gov/vuln/search/results?adv_search=false&form_type=basic&results_type=overview&search_type=all&query='$VAR1 2> /dev/null
+
+	echo "[+] Search CVE details for exploits"
+        firefox 'http://www.cvedetails.com/product-search.php?vendor_id=0&search='$VAR1'' 2> /dev/null
+
+	echo "[+] Search Google for exploits"
+        firefox 'https://www.google.com/search?q='$VAR1'+'$VAR2'+'$VAR3'+-site%3Anvd.nist.gov+-site%3A0day.today+-site%3Awww.securityfocus.com+-site%3Awww.cvedetails.com+-site%3Awww.exploit-db.com+exploit' 2>/dev/null
+fi
+
+exit
