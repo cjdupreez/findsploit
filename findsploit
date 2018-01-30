@@ -37,22 +37,32 @@ else
         /usr/bin/searchsploit $VAR1 $VAR2 $VAR3
         echo ""
         echo "[+] Press any key to search online or Ctrl+C to exit..."
-        read test
+        echo ""
+	read test
 
         echo "[+] Search Security Focus for exploits"
+	echo ""
 	firefox 'https://www.google.com/search?q='$VAR1'+'$VAR2'+'$VAR3'+exploit+site:www.securityfocus.com' 2> /dev/null
 
         echo "[+] Search 0day.today for exploits"
+	echo ""
 	firefox 'https://www.google.com/search?q='$VAR1'+'$VAR2'+'$VAR3'+site:0day.today' 2> /dev/null
 
-        echo "[+] Search NVD for exploits"
+        echo "[+] Search PacketStorm for exploits"
+        echo ""
+	firefox 'https://packetstormsecurity.com/search/?q='$VAR1'+'$VAR2'+'$VAR3 2> /dev/null
+
+	echo "[+] Search NVD for exploits"
+	echo ""
 	firefox 'https://nvd.nist.gov/vuln/search/results?adv_search=false&form_type=basic&results_type=overview&search_type=all&query='$VAR1 2> /dev/null
 
 	echo "[+] Search CVE details for exploits"
-        firefox 'http://www.cvedetails.com/product-search.php?vendor_id=0&search='$VAR1'' 2> /dev/null
+        echo ""
+	firefox 'http://www.cvedetails.com/product-search.php?vendor_id=0&search='$VAR1 2> /dev/null
 
 	echo "[+] Search Google for exploits"
-        firefox 'https://www.google.com/search?q='$VAR1'+'$VAR2'+'$VAR3'+-site%3Anvd.nist.gov+-site%3A0day.today+-site%3Awww.securityfocus.com+-site%3Awww.cvedetails.com+-site%3Awww.exploit-db.com+exploit' 2>/dev/null
+        echo ""
+	firefox 'https://www.google.com/search?q='$VAR1'+'$VAR2'+'$VAR3'+-site%3Anvd.nist.gov+-site%3A0day.today+-site%3Awww.securityfocus.com+-site%3Awww.cvedetails.com+-site%3Awww.exploit-db.com+-site%3Awww.packetstormsecurity.com+exploit' 2>/dev/null
 fi
 
 exit
